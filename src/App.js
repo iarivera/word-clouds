@@ -45,20 +45,28 @@ class App extends Component {
       .domain([d3.min(data, d => d[1]), d3.max(data, d => d[1])])
       .range([20,80]);
     
-    const x_scale = d3.scaleLinear().domain([0,1]).range([50, w - 50]);
-    const y_scale = d3.scaleLinear().domain([0,1]).range([50, h - 50]);
+    let cumulX = 100;
 
-    svg.selectAll("text")
+    const text = svg.selectAll("text")
       .data(data)
       .enter()
       .append("text")
       .text(d => d[0])
-      .attr("font-size", d => fontScale(d[1]))
-      .attr("x", () => x_scale(Math.random()))
+      .attr("font-size", 0)
+      .attr("x", function(d, i) {
+        const wordLen = this.getComputedTextLength();
+        const currX = cumulX;
+        cumulX += wordLen + 150;
+        return currX;
+      })
       .attr("y", h / 2)
       .attr("fill", "black")
       .attr("text-anchor", "middle")
       .attr("font-family", "Times New Roman");
+      
+    text.transition()
+      .duration(2500)
+      .attr("font-size", d => fontScale(d[1]))
   }
 
   render() {
