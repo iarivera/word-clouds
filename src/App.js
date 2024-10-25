@@ -32,6 +32,7 @@ class App extends Component {
     const data = this.state.wordFrequency.sort((a,b)=>b[1]-a[1]).slice(0,5)
     console.log(data)
     // your code here
+    d3.select('svg').selectAll('*').remove();
     
     const margin = { top: 50, right: 10, bottom: 50, left: 30},
       w = 1000 - margin.left - margin.right,
@@ -76,7 +77,8 @@ class App extends Component {
       <div className="parent">
         <div className="child1" style={{width: 1000 }}>
         <textarea type="text" id="input_field" style={{ height: 150, width: 1000 }}/>
-          <button type="submit" value="Generate Matrix" style={{ marginTop: 10, height: 40, width: 1000 }} onClick={() => {
+          <button type="submit" value="Generate Matrix" style={{ marginTop: 10, height: 40, width: 1000 }} 
+          onClick={() => {
                 var input_data = document.getElementById("input_field").value
                 this.setState({wordFrequency:this.getWordFrequency(input_data)})
               }}
