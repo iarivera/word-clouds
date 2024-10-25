@@ -25,6 +25,8 @@ class App extends Component {
     }, {}));
   }
 
+  /*The streets were filled with people, people walking, people talking, people laughing, people in a hurry. Everyone seemed to be in a rush, moving quickly from one place to another. The city was alive with activity, with people everywhere you looked. The noise of the city was constant, with cars honking, people chatting, and footsteps echoing through the streets. It was a city full of people, a city where life never stopped.*/
+  /*The streets stretched endlessly, weaving through the heart of the city, connecting neighborhoods in a seamless flow. In every corner of the city, there was something happening, whether it was the vibrant market stalls or the quiet parks hidden amidst the urban landscape. The city skyline towered above, a reminder of the ambition and drive that defined the city. As night fell, the lights of the city illuminated the streets, casting a glow that reminded everyone just how alive the city truly was.*/
 
   renderChart() {
     const data = this.state.wordFrequency.sort((a,b)=>b[1]-a[1]).slice(0,5)
