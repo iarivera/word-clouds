@@ -32,8 +32,6 @@ class App extends Component {
     const data = this.state.wordFrequency.sort((a,b)=>b[1]-a[1]).slice(0,5)
     console.log(data)
     // your code here
-    d3.select('svg').selectAll('*').remove();
-    
     const margin = { top: 50, right: 10, bottom: 50, left: 30},
       w = 1000 - margin.left - margin.right,
       h = 300 - margin.top - margin.bottom;
@@ -51,12 +49,13 @@ class App extends Component {
     let cumulX = 100;
 
     const text = svg.selectAll("text")
-      .data(data)
-      .enter()
+      .data(data, d => d[0]);
+    
+    text.enter()
       .append("text")
       .text(d => d[0])
       .attr("font-size", 0)
-      .attr("x", function(d, i) {
+      .attr("x", function() {
         const wordLen = this.getComputedTextLength();
         const currX = cumulX;
         cumulX += wordLen + 150;
@@ -65,11 +64,10 @@ class App extends Component {
       .attr("y", h / 2)
       .attr("fill", "black")
       .attr("text-anchor", "middle")
-      .attr("font-family", "Times New Roman");
-      
-    text.transition()
+      .attr("font-family", "Times New Roman")
+      .transition()
       .duration(2500)
-      .attr("font-size", d => fontScale(d[1]))
+      .attr("font-size", d => fontScale(d[1]));
   }
 
   render() {
